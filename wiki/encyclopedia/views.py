@@ -22,17 +22,25 @@ def entry(request,title):
         return render(request,"encyclopedia/error.html")
 def search(request):
     entries = util.list_entries()
+    
     if request.method == 'POST':
         entry_search = request.POST['q']
-        sub_entries = [entry for entry in entries if entry_search in entry]
         if entry_search in entries:
-            return entry(request,entry_search)
-        elif sub_entries is not None:
-            return render(request,"encyclopedia/searchresults.html",{
-                "results":sub_entries
+            return render(request, "encyclopedia/entry.html", {
+                "title": entry_search,
+                "content": util.get_entry(entry_search)
+            })
+        sub_entries = [entry for entry in entries if entry_search.lower() in entry.lower()]
+        
+        if sub_entries:
+            return render(request, "encyclopedia/searchresults.html", {
+                "results": sub_entries
             })
         else:
-            return render(request,"encyclopedia/error.html",{"message":'The page you are trying to access doesn\'t exist'})
+            return render(request, "encyclopedia/error.html", {
+                "message": "No results found for your search."
+            })
+
 
 def new(request):
     if request.method == 'POST':
