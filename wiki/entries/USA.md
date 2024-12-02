@@ -1,0 +1,1 @@
+USA united states of America is country primarily located in North America.The capital of USA is Washington D.C 

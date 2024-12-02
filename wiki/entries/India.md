@@ -1,0 +1,1 @@
+India is a south Asian country ,Capital of India is New Delhi.
